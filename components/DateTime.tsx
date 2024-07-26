@@ -15,7 +15,7 @@ export const DateTime = () => {
     return () => {
       clearInterval(timer);
     };
-  });
+  }, []);
 
   return (
     <>
