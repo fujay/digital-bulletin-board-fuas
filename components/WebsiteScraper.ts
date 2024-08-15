@@ -22,7 +22,7 @@ export async function scrapeViaService(url: string) {
  * @param selectors - An array of selectors for the data elements to scrape.
  * @returns An object containing the scraped header and data.
  */
-export async function scraperSelectors(
+export async function scrapeViaCheerio(
   url: string,
   title: string,
   selectors: string[]
@@ -56,23 +56,26 @@ export async function scraperSelectors(
  * @param selectors - An array of selectors for the data elements on the website.
  * @returns An object containing the scraped title and data.
  */
-export async function scrapeWebsite(
+export async function scrapeViaPuppeteer(
   url: string,
   titleSelector: string,
-  selectors: string[]
+  selectors: string[],
+  width: number = 1080,
+  height: number = 768
 ) {
   let browser;
 
   try {
     browser = await puppeteer.launch();
+
     const page = await browser.newPage();
 
     await page.setViewport({
-      width: 1080,
-      height: 768,
+      width: width,
+      height: height,
     });
 
-    await page.goto(url);
+    await page.goto(url, { waitUntil: "domcontentloaded" });
 
     const data = await page.evaluate(
       (titleSelector, selectors) => {
@@ -96,6 +99,7 @@ export async function scrapeWebsite(
       selectors
     );
     console.log(data);
+    return data;
 
     //
 
@@ -119,4 +123,30 @@ export async function scrapeWebsite(
     await browser?.close();
   } */
   await browser?.close();
+}
+
+export async function scrapeScreenshot(
+  url: string,
+  titleSelector: string,
+  selector: string,
+  width: number = 1080,
+  height: number = 1768
+) {
+  const browser = await puppeteer.launch();
+  const page = await browser.newPage();
+
+  await page.setViewport({
+    width: width,
+    height: height,
+  });
+
+  await page.goto(url);
+
+  const element = await page.$(selector);
+
+  const title = await page.$eval(titleSelector, (el) => el.textContent?.trim());
+
+  await element?.screenshot({ path: "public/screenshot.png" });
+
+  await browser.close();
 }
