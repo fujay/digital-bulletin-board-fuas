@@ -34,7 +34,7 @@ export const DateTime = () => {
     //   </div>
     // </>
     <div>
-      <Clock renderNumbers={true} value={date} />
+      <Clock renderNumbers={true} value={date} locale="en-EN" />
     </div>
   );
 };
