@@ -12,8 +12,11 @@ export default function IconButton({
   ...otherProps
 }: IconButtonProps) {
   return (
-    <button {...otherProps}>
-      <span>
+    <button
+      className="p-4 bg-fuas-primary border rounded focus:outline-none focus:ring hover:bg-fuas-secondary hover:text-fuas-primary hover:border-fuas-primary flex items-center"
+      {...otherProps}
+    >
+      <span className="pr-4">
         <Icon />
       </span>
       <span>{children}</span>
