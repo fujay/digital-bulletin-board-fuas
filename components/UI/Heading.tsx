@@ -13,7 +13,7 @@ export default function Heading() {
   return (
     <h1 className="flex flex-row flex-nowrap items-center mt-24 text-4xl font-bold">
       <span className="flex-grow block border-t-2 border-fuas-secondary"></span>
-      <span className="flex-none block mx-4 px-4 py-2.5  rounded leading-none bg-fuas-primary text-fuas-secondary">
+      <span className="flex-none block mx-4 px-4 py-2.5 rounded leading-none bg-fuas-primary text-fuas-secondary">
         {capitalizedHeading}
       </span>
       {path.split("/").length > 2 && (
