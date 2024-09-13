@@ -22,7 +22,7 @@ function Input({ label, id, icon: Icon, tooltip, ...props }: InputProps) {
       {tooltip && (
         <TooltipProvider>
           <Tooltip>
-            <TooltipTrigger type="button">
+            <TooltipTrigger type="button" className="ml-2">
               <HiOutlineQuestionMarkCircle />
             </TooltipTrigger>
             <TooltipContent>
