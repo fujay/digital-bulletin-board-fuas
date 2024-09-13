@@ -1,6 +1,13 @@
 import { ComponentPropsWithoutRef } from "react";
 import { IconType } from "react-icons";
-/* City or Coordinates as &apos;lat,lon&apos; like 50.11552, 8.68417 */
+import { HiOutlineQuestionMarkCircle } from "react-icons/hi2";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/UI/tooltip";
+
 type InputProps = {
   label: string;
   id: string;
@@ -12,7 +19,21 @@ function Input({ label, id, icon: Icon, tooltip, ...props }: InputProps) {
   return (
     <div>
       <label htmlFor={id}>{label}</label>
-      {tooltip && <label className="text-xs"> (?)</label>}
+      {tooltip && (
+        <TooltipProvider>
+          <Tooltip>
+            <TooltipTrigger type="button">
+              <HiOutlineQuestionMarkCircle />
+            </TooltipTrigger>
+            <TooltipContent>
+              <p>
+                City or Coordinates as &apos;lat, lon&apos; like{" "}
+                <b>50.11552, 8.68417</b> or <b>Frankfurt am Main</b>
+              </p>
+            </TooltipContent>
+          </Tooltip>
+        </TooltipProvider>
+      )}
       <div className="relative mt-2">
         {Icon && (
           <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
