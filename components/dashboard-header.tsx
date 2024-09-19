@@ -6,7 +6,7 @@ import NavLink from "./nav-link";
 
 export default function DashboardHeader() {
   return (
-    <header className="flex items-center justify-between pt-3 px-3">
+    <header className="animate-slide flex items-center justify-between pt-3 px-3">
       <div className="hover:animate-pulse hover:ring">
         <Link href="/">
           <Image src={logo} alt="FUAS logo" priority />
