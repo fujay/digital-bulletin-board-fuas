@@ -26,10 +26,7 @@ function Input({ label, id, icon: Icon, tooltip, ...props }: InputProps) {
               <HiOutlineQuestionMarkCircle />
             </TooltipTrigger>
             <TooltipContent>
-              <p>
-                City or Coordinates as &apos;lat, lon&apos; like{" "}
-                <b>50.11552, 8.68417</b> or <b>Frankfurt am Main</b>
-              </p>
+              <p>{tooltip}</p>
             </TooltipContent>
           </Tooltip>
         </TooltipProvider>
