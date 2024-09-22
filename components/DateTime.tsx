@@ -25,7 +25,6 @@ const DateTime = ({ config }: DateTimeProps) => {
     };
   }, []);
 
-  console.log("comp", config["clock"]);
   return (
     <>
       {config.clock === "Clock" && (
