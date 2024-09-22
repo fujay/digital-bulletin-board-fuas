@@ -6,7 +6,13 @@ import Clock from "react-clock";
 import { clearInterval, setInterval } from "timers";
 import "react-clock/dist/Clock.css";
 
-export const DateTime = () => {
+type DateTimeProps = {
+  config: {
+    clock: "Clock" | "Date" | "Clock and Date";
+  };
+};
+
+const DateTime = ({ config }: DateTimeProps) => {
   const [date, setDate] = useState<Date>(new Date());
 
   useEffect(() => {
@@ -19,23 +25,30 @@ export const DateTime = () => {
     };
   }, []);
 
+  console.log("comp", config["clock"]);
   return (
-    // <>
-    //   <time dateTime={date.toISOString()}>{date.toLocaleString()}</time>
-    //   <div className="text-xl">
-    //     {moment().format("MMMM Do YYYY, h:mm:ss a")}
-    //     <p>
-    //       Full :{" "}
-    //       {new Intl.DateTimeFormat("en-GB", {
-    //         dateStyle: "full",
-    //         timeStyle: "long",
-    //       }).format(date)}
-    //     </p>
-    //   </div>
-    // </>
-    <div>
-      <Clock renderNumbers={true} value={date} locale="en-EN" />
-    </div>
+    <>
+      {config.clock === "Clock" && (
+        <div className="flex justify-center">
+          <Clock renderNumbers={true} value={date} locale="en-EN" />
+        </div>
+      )}
+      {config.clock === "Date" && (
+        <div className="text-xl">
+          {moment().format("MMMM Do YYYY, hh:mm a")}
+        </div>
+      )}
+      {config.clock === "Clock and Date" && (
+        <>
+          <div className="flex justify-center">
+            <Clock renderNumbers={true} value={date} locale="en-EN" />
+          </div>
+          <div className="mt-2 text-xl">
+            {moment().format("MMMM Do YYYY, hh:mm a")}
+          </div>
+        </>
+      )}
+    </>
   );
 };
 
