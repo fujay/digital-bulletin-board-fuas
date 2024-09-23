@@ -6,9 +6,9 @@ import { IoIosSave } from "react-icons/io";
 import Notification from "./UI/Notification";
 import { useActionState } from "react";
 import IconButton from "./UI/IconButton";
-import Input from "./UI/Input";
-import Form from "./UI/Form";
-import { onSaveAction } from "@/app/actions/actions";
+import Input from "./UI/FormInput";
+import Form from "./UI/ConfigForm";
+import { onWeatherSaveAction } from "@/app/actions/actions";
 import { useFormStatus } from "react-dom";
 
 type WeatherConfigProps = {
@@ -24,21 +24,21 @@ export default function WeatherConfig({
 }: WeatherConfigProps) {
   const { showNotification, notification } = useNotificationContext();
   // const [error, action, isPending] = useActionState(saveConfig, null);
-  console.log("WeatherConfig", location, qrcode, graphic);
 
   return (
     <>
-      <Form onSaveAction={onSaveAction}>
+      <Form onSaveAction={onWeatherSaveAction}>
         <Input
+          // value={location}
           defaultValue={location}
           label="Search location via city name or coordinates"
           id="location"
           icon={FaMapLocationDot}
           type="text"
           placeholder="Search location"
-          title="City or Coordinates as 'lat,lon' like 50.11552, 8.68417"
+          title="City or Coordinates as 'lat, lon' like 50.11552, 8.68417 or Frankfurt am Main"
           aria-label="Search location via city name or coordinates"
-          tooltip="City or Coordinates as 'lat,lon' like 50.11552, 8.68417"
+          tooltip="City or Coordinates as 'lat, lon' like 50.11552, 8.68417 or Frankfurt am Main"
           required
         />
         <Input
@@ -54,10 +54,11 @@ export default function WeatherConfig({
           <label htmlFor="graphic">Weather graphics</label>
           <div>
             <select
+              // value={graphic}
               defaultValue={graphic}
               id="graphic"
               name="graphic"
-              className="rounded border border-fuas-secondary text-fuas-primary focus:border-fuas-primary focus:outline-none"
+              className="rounded mt-3 border border-fuas-secondary text-fuas-primary focus:border-fuas-primary focus:outline-none"
             >
               <option>Classic</option>
               <option>Animated</option>

@@ -1,6 +1,16 @@
 import prisma from "@/lib/db";
 import ActivityGraph from "./ActivityGraph";
 import DashCard from "./DashCards";
+import {
+  Table,
+  TableBody,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "../UI/table";
+import { getBulletins } from "@/lib/getBulletins";
+import BulletinRow from "../UI/BulletinRow";
+import { HiOutlineCircleStack } from "react-icons/hi2";
 
 const weekOverview = async () => {
   const data = [];
@@ -51,6 +61,8 @@ export default async function DashGrid() {
     })
   ).toString();
 
+  const bulletinsData = await getBulletins();
+
   return (
     <div className="px-4 grid gap-3 lg:grid-cols-4">
       <DashCard
@@ -60,6 +72,26 @@ export default async function DashGrid() {
       />
 
       <ActivityGraph data={data} />
+
+      <div className="col-span-4 p-4 container rounded border border-fuas-secondary">
+        <h3 className="flex text-fuas-primary items-center gap-1.5 font-medium">
+          <HiOutlineCircleStack /> Datasets
+        </h3>
+        <Table>
+          <TableHeader>
+            <TableRow>
+              <TableHead>Title</TableHead>
+              <TableHead>Content</TableHead>
+              <TableHead>Created</TableHead>
+            </TableRow>
+          </TableHeader>
+          <TableBody>
+            {bulletinsData.map((bulletin) => (
+              <BulletinRow key={bulletin.id} bulletin={bulletin} />
+            ))}
+          </TableBody>
+        </Table>
+      </div>
     </div>
   );
 }

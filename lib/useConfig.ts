@@ -13,9 +13,12 @@ export async function readKeyConfig(key: string) {
   return keyConfig;
 }
 
-export async function saveConfig(newConfig: {}, key: string) {
+export async function saveConfig(newConfig: {}, key: string, index?: number) {
   const configFileContent = await fs.readFile("configData.json", "utf-8");
   const config = JSON.parse(configFileContent);
+  if (index) {
+    config[key][index] = newConfig;
+  }
   config[key] = newConfig;
 
   await fs.writeFile("configData.json", JSON.stringify(config));

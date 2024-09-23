@@ -11,8 +11,10 @@ const inter = Inter({ subsets: ["latin"] });
 
 export default function DashboardLayout({
   children,
+  modal,
 }: Readonly<{
   children: React.ReactNode;
+  modal: React.ReactNode;
 }>) {
   // const { notification } = useNotificationContext();
 
@@ -20,6 +22,7 @@ export default function DashboardLayout({
     <section className={`${inter.className} bg-neutral-200/70 h-screen`}>
       <NotificationContextProvider>
         <DashboardHeader />
+        {modal}
         {children}
         {/* {notification && (
           <Notification

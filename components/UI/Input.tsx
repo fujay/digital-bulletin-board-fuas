@@ -1,53 +1,25 @@
-import { ComponentPropsWithoutRef } from "react";
-import { IconType } from "react-icons";
-import { HiOutlineQuestionMarkCircle } from "react-icons/hi2";
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipProvider,
-  TooltipTrigger,
-} from "@/components/UI/tooltip";
+import * as React from "react"
 
-type InputProps = {
-  label: string;
-  id: string;
-  icon?: IconType;
-  tooltip?: string;
-} & ComponentPropsWithoutRef<"input">;
+import { cn } from "@/lib/utils"
 
-function Input({ label, id, icon: Icon, tooltip, ...props }: InputProps) {
-  return (
-    <div>
-      <label htmlFor={id}>{label}</label>
-      {tooltip && (
-        <TooltipProvider>
-          <Tooltip>
-            <TooltipTrigger type="button" className="ml-2">
-              <HiOutlineQuestionMarkCircle />
-            </TooltipTrigger>
-            <TooltipContent>
-              <p>{tooltip}</p>
-            </TooltipContent>
-          </Tooltip>
-        </TooltipProvider>
-      )}
-      <div className="relative mt-2">
-        {Icon && (
-          <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
-            <span className="text-fuas-secondary ">
-              <Icon />
-            </span>
-          </div>
+export interface InputProps
+  extends React.InputHTMLAttributes<HTMLInputElement> {}
+
+const Input = React.forwardRef<HTMLInputElement, InputProps>(
+  ({ className, type, ...props }, ref) => {
+    return (
+      <input
+        type={type}
+        className={cn(
+          "flex h-10 w-full rounded-md border border-neutral-200 bg-white px-3 py-2 text-sm ring-offset-white file:border-0 file:bg-transparent file:text-sm file:font-medium file:text-neutral-950 placeholder:text-neutral-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-950 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 dark:border-neutral-800 dark:bg-neutral-950 dark:ring-offset-neutral-950 dark:file:text-neutral-50 dark:placeholder:text-neutral-400 dark:focus-visible:ring-neutral-300",
+          className
         )}
-        <input
-          className="block border text-fuas-primary border-fuas-secondary focus:border-fuas-primary rounded focus:outline-none w-full px-4 py-2 pl-10"
-          id={id}
-          name={id}
-          {...props}
-        />
-      </div>
-    </div>
-  );
-}
+        ref={ref}
+        {...props}
+      />
+    )
+  }
+)
+Input.displayName = "Input"
 
-export default Input;
+export { Input }

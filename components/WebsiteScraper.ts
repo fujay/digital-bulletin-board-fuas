@@ -146,7 +146,7 @@ export async function scrapeScreenshot(
 
   const title = await page.$eval(titleSelector, (el) => el.textContent?.trim());
 
-  await element?.screenshot({ path: "public/screenshot.png" });
+  await element?.screenshot({ path: `public/images/${url}.png` });
 
   await browser.close();
 }

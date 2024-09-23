@@ -25,8 +25,6 @@ export default function ProgressBar() {
     };
   }, []);
 
-  console.log(remainingTime);
-
   return (
     <progress
       className="w-full [&::-webkit-progress-bar]:rounded-lg [&::-webkit-progress-value]:rounded-lg   [&::-webkit-progress-bar]:bg-fuas-secondary [&::-webkit-progress-value]:bg-fuas-primary [&::-moz-progress-bar]:bg-fuas-primary "

@@ -1,8 +1,8 @@
 import DashboardComponent from "@/components/Dashboard/DashboardComponent";
-import Heading from "@/components/UI/Heading";
-import Sidebar from "@/components/Sidebar/Sidebar";
-import { readConfig } from "@/lib/useConfig";
 import List from "@/components/List";
+import Sidebar from "@/components/Sidebar/Sidebar";
+import Heading from "@/components/UI/Heading";
+import { readConfig } from "@/lib/useConfig";
 
 export default async function Dashboard() {
   const account = process.env.EMAIL || "";

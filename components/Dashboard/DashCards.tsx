@@ -1,6 +1,5 @@
-import prisma from "@/lib/db";
 import { IconType } from "react-icons";
-import { TbChartArcs, TbCalendar } from "react-icons/tb";
+import { TbCalendar, TbChartArcs } from "react-icons/tb";
 
 type CardProps = {
   Icon: IconType;
